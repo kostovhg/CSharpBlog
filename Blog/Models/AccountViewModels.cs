@@ -71,7 +71,7 @@ namespace Blog.Models
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Full Name")]
+        [Display(Name ="Full Name")]
         public string FullName { get; set; }
 
         [Required]

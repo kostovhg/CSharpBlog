@@ -12,9 +12,9 @@ namespace Blog.Models
         [Key]
         public int Id { get; set; }
 
+
         [Required]
-        [MinLength(3)]
-        [StringLength(50)]
+        [StringLength(255)]
         public string Title { get; set; }
 
         public string Content { get; set; }
@@ -22,17 +22,6 @@ namespace Blog.Models
         [ForeignKey("Author")]
         public string AuthorId { get; set; }
 
-        public DateTime DateAdded
-        {
-            get;
-            set;
-            //{
-            //    DateAdded = DateTime.Now;
-            //}
-        }
-
         public virtual ApplicationUser Author { get; set; }
-
-
     }
 }

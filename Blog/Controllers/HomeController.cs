@@ -10,8 +10,7 @@ namespace Blog.Controllers
     {
         public ActionResult Index()
         {
-            //return RedirectToAction("List", "Article");
-            return View();
+            return RedirectToAction("List", "Article");
         }
 
         //public ActionResult About()

@@ -17,12 +17,11 @@ namespace Blog.Controllers
             return RedirectToAction("List");
         }
 
-        ///
+        //
         // GET: Article/List
         public ActionResult List()
         {
 
-            //var database = new BlogDbContext();
             using (var database = new BlogDbContext())
             {
                 // Get articles from database
@@ -32,10 +31,10 @@ namespace Blog.Controllers
 
                 return View(articles);
             }
-                
+            //return View();
         }
 
-        // 
+        //
         // GET: Article/Details
         public ActionResult Details(int? id)
         {
@@ -46,18 +45,59 @@ namespace Blog.Controllers
 
             using (var database = new BlogDbContext())
             {
+                // Get the article from database
+
                 var article = database.Articles
                     .Where(a => a.Id == id)
                     .Include(a => a.Author)
                     .First();
 
-
-                if(article == null)
+                if (article == null)
                 {
                     return HttpNotFound();
                 }
+
                 return View(article);
             }
+
+            
         }
+
+        //
+        // GET: Article/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //
+        // POST: Article/Create
+        [HttpPost]
+        public ActionResult Create(Article article)
+        {
+            if(ModelState.IsValid)
+            {
+                using (var database = new BlogDbContext())
+                {
+                    // Get author id
+                    var authorId = database.Users
+                        .Where(u => u.UserName == this.User.Identity.Name)
+                        .First()
+                        .Id;
+
+                    // Set articles author
+                    article.AuthorId = authorId;
+
+                    // Save article in DB
+                    database.Articles.Add(article);
+                    database.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View(article);
+        }
+
     }
 }
