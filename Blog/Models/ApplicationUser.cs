@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Blog.Models
 {
@@ -14,6 +15,7 @@ namespace Blog.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
+        [Remote("doesUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "User name already exists. Please enter a different user name.")]
         public string FullName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
