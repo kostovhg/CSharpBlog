@@ -75,7 +75,7 @@ namespace Blog.Controllers.Admin
             {
                 // Get user from database
                 var user = database.Users
-                    .Where(u => u.Id.Equals(id))
+                    .Where(u => u.Id == (id))
                     .First();
 
                 // Check if user exist
@@ -106,7 +106,7 @@ namespace Blog.Controllers.Admin
                 using (var database = new BlogDbContext())
                 {
                     // Get user from database
-                    var user = database.Users.FirstOrDefault(u => u.Id.Equals(id));
+                    var user = database.Users.FirstOrDefault(u => u.Id == (id));
 
                     // Check if user exist
                     if(user == null)
@@ -173,7 +173,7 @@ namespace Blog.Controllers.Admin
             {
                 // Get user from database
                 var user = database.Users
-                    .Where(u => u.Id.Equals(id))
+                    .Where(u => u.Id == id)
                     .First();
 
                 // Check if user exist
@@ -202,7 +202,7 @@ namespace Blog.Controllers.Admin
 
                 // Get user from datatabase
                 var user = database.Users
-                    .Where(u => u.Id.Equals(id))
+                    .Where(u => u.Id == (id))
                     .First();
 
                 // Get user articles from database
